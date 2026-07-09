@@ -12,13 +12,14 @@ val pluginPackageName = "org.godotengine.plugin.googleplaybilling"
 android {
     namespace = pluginPackageName
     compileSdk = 36
+    ndkVersion = "25.3.12161346"
 
     buildFeatures {
         buildConfig = true
     }
 
     defaultConfig {
-        minSdk = 23
+        minSdk = 19
         manifestPlaceholders["godotPluginName"] = pluginName
         manifestPlaceholders["godotPluginPackageName"] = pluginPackageName
         buildConfigField("String", "GODOT_PLUGIN_NAME", "\"${pluginName}\"")
@@ -35,7 +36,8 @@ android {
 }
 
 dependencies {
-    implementation("org.godotengine:godot:4.5.1.stable")
+    compileOnly(files("libs/godot-lib.template_release.aar"))
+    implementation("androidx.core:core-ktx:1.13.1")
     implementation("com.android.billingclient:billing-ktx:8.3.0")
 }
 
